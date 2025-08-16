@@ -11,14 +11,16 @@ export async function POST(request: NextRequest) {
       throw new Error("Invalid credentials");
     }
 
-    return NextResponse
-      .json({ message: "Sign in successul", data: user })
-      .cookies.set("user-session", JSON.stringify(user), {
-        httpOnly: false,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "lax",
-        maxAge: 60 * 60 * 24 * 7 // 1 minggu
-      });
+    const response = NextResponse.json({ message: "Sign in successul", data: user })
+
+    response.cookies.set("user-session", JSON.stringify(user), {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      maxAge: 60 * 60 * 24 * 7 // 1 minggu
+    });
+
+    return response;
   } catch (err) {
     if (err instanceof Error) {
       return NextResponse.json(
