@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Jost } from "next/font/google";
 import "./globals.css";
+import Provider from "./providers";
+import { isAuthenticated } from "@/lib/auth";
+import { Container, CssBaseline } from "@mui/material";
 
-const geistSans = Geist({
+const jost = Jost({
   variable: "--font-geist-sans",
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: ["400", "500", "600"]
 });
 
 export const metadata: Metadata = {
@@ -17,17 +16,21 @@ export const metadata: Metadata = {
   description: "Note Taking Application",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const isUserAuthenticated = await isAuthenticated();
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${jost.variable} antialiased`}
       >
-        {children}
+        <Provider isAuthenticated={isUserAuthenticated}>
+          <CssBaseline/>
+          <Container>{children}</Container>
+        </Provider>
       </body>
     </html>
   );

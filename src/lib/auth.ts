@@ -42,6 +42,7 @@ export const authenticateUser = async (email: string, password: string) => {
     email: user.email
   };
 }
+
 export const isAuthenticated = async (): Promise<boolean> => {
   const cookieStore = await cookies();
   return !!cookieStore.get("user-session")?.value;
