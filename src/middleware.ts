@@ -11,7 +11,7 @@ export async function middleware(request: NextRequest) {
     !isUserAuthenticated &&
     authenticatedRoutes.some((route: { title: string, path: string }) => pathname.startsWith(route.path))
   ) {
-    return NextResponse.redirect(new URL("/signin", request.url));
+    return NextResponse.redirect(new URL("/auth/signin", request.url));
   }
 
   // kalau user sudah terautentikasi dan user ingin mengakses unauthenticated routes, redirect user ke dashboard
@@ -26,5 +26,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/signup", "/signin"]
+  matcher: ["/dashboard/:path*", "/auth/:path*"]
 };

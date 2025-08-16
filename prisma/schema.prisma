@@ -18,6 +18,8 @@ model User {
   notes Note[]
   sharedNotes SharedNote[]
   comments Comment[]
+
+  @@map("users")
 }
 
 model Note {
@@ -32,6 +34,8 @@ model Note {
   author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
   sharedWith SharedNote[]
   comments Comment[]
+
+  @@map("notes")
 }
 
 model SharedNote {
@@ -43,6 +47,8 @@ model SharedNote {
 
   note Note @relation(fields: [noteId], references: [id], onDelete: Cascade)
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("shared_notes")
 }
 
 model Comment {
@@ -55,4 +61,6 @@ model Comment {
 
   author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
   note Note @relation(fields: [noteId], references: [id], onDelete: Cascade)
+
+  @@map("comments")
 }

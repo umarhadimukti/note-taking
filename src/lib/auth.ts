@@ -1,4 +1,3 @@
-import { IUserPayload } from "@/types";
 import bcrypt from "bcryptjs";
 import { prisma } from "./prisma";
 import { cookies } from "next/headers";
