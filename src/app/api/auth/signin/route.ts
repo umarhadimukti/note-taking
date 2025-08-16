@@ -1,5 +1,4 @@
 import { IUserSignin } from "@/types";
-import { Prisma } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 import { authenticateUser } from "@/lib/auth";
 
