@@ -3,3 +3,8 @@ export interface IUserPayload {
   email: string;
   password: string;
 }
+
+export interface IUserSignin {
+  email: string;
+  password: string;
+}

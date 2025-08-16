@@ -11,15 +11,15 @@ export const verifyPassword = async (password: string, hashPassword: string): Pr
   return await bcrypt.compare(password, hashPassword);
 }
 
-export const createUser = async (payload: IUserPayload): Promise<{name: string, email: string}> => {
-  const hashedPassword = await hashPassword(payload.password);
+export const createUser = async (name: string, email: string, password: string): Promise<{id: string, name: string, email: string}> => {
+  const hashedPassword = await hashPassword(password);
   return await prisma.user.create({
     data: {
-      name: payload.name,
-      email: payload.email,
+      name: name,
+      email: email,
       password: hashedPassword
     },
-    select: { name: true, email: true }
+    select: { id: true, name: true, email: true }
   });
 }
 
