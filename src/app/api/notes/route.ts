@@ -1,15 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
-function getUserFromCookie(request: NextRequest) {
-  const userCookie = request.cookies.get('user-session');
-  if (!userCookie) return null;
-  return JSON.parse(userCookie.value);
-}
-
 export async function GET(request: NextRequest) {
   try {
-    const user = getUserFromCookie(request);
+    const rawUserCookie = request.cookies.get("user-session");
+    const userFromCookie = rawUserCookie && JSON.parse(rawUserCookie.value);
+    const user = await prisma.user.findUnique({ where: { email: userFromCookie.email } });
     if (!user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
@@ -49,13 +45,16 @@ export async function GET(request: NextRequest) {
       { status: 200 }
     );
   } catch (err) {
+    console.log(err)
     return NextResponse.json({ error: 'Failed to fetch notes' }, { status: 500 });
   }
 }
 
 export async function POST(request: NextRequest) {
   try {
-    const user = getUserFromCookie(request);
+    const rawUserCookie = request.cookies.get("user-session");
+    const userFromCookie = rawUserCookie && JSON.parse(rawUserCookie.value);
+    const user = await prisma.user.findUnique({ where: { email: userFromCookie.email } });
     if (!user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }

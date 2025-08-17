@@ -1,10 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { authenticatedRoutes, unauthenticatedRoutes } from './constants/routes';
-import { isAuthenticated } from "./lib/auth";
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  const isUserAuthenticated = await isAuthenticated();
+  const isUserAuthenticated = !!request.cookies.get("user-session")?.value;
 
   // kalau user tidak terautentikasi dan user ingin mengakses protected route, redirect user ke signin
   if (

@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Jost } from "next/font/google";
 import "./globals.css";
 import Provider from "./providers";
-import { isAuthenticated } from "@/lib/auth";
 import { Container, CssBaseline } from "@mui/material";
+import { cookies } from "next/headers";
 
 const jost = Jost({
   variable: "--font-jost",
@@ -21,7 +21,8 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const isUserAuthenticated = await isAuthenticated();
+  const cookieStore = await cookies();
+  const isUserAuthenticated = !!cookieStore.get("user-session")?.value;
   return (
     <html lang="en">
       <body

@@ -32,3 +32,9 @@ export interface Comment {
   createdAt: string
   author: User
 }
+
+export interface INotePayload {
+  title: string;
+  content: string;
+  isPublic: boolean;
+}
