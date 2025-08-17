@@ -6,7 +6,7 @@ import { isAuthenticated } from "@/lib/auth";
 import { Container, CssBaseline } from "@mui/material";
 
 const jost = Jost({
-  variable: "--font-geist-sans",
+  variable: "--font-jost",
   subsets: ["latin"],
   weight: ["400", "500", "600"]
 });
