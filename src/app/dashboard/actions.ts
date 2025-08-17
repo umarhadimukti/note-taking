@@ -2,7 +2,6 @@ import { api } from "@/lib/apiClient";
 import { INotePayload } from "@/types";
 
 export const getAllNotes = async () => {
-  console.log('actions get all notes')
   const response = await api.get("/notes");
   return response.data.notes;
 }
@@ -28,6 +27,6 @@ export const getCurrentUser = async () => {
 }
 
 export const logoutUser = async () => {
-  const response = await api.post("/logout");
+  const response = await api.post("/auth/logout");
   return response.data;
 }

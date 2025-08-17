@@ -105,13 +105,13 @@ export default function DashboardPage() {
               )}
               <button
                 onClick={() => setShowCreateForm(true)}
-                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 hover:cursor-pointer"
               >
                 New Note
               </button>
               <button
                 onClick={handleLogout}
-                className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+                className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 hover:cursor-pointer"
               >
                 Logout
               </button>
@@ -210,7 +210,7 @@ export default function DashboardPage() {
                           placeholder="Add a comment..."
                           value={commentContent}
                           onChange={(e) => setCommentContent(e.target.value)}
-                          className="w-full p-2 border border-gray-300 rounded text-sm h-20"
+                          className="w-full p-2 border border-gray-300 rounded text-gray-700 text-sm h-20"
                         />
                         <div className="flex space-x-2">
                           <button
@@ -249,9 +249,9 @@ export default function DashboardPage() {
                       {note.comments.map((comment) => (
                         <div
                           key={comment.id}
-                          className="bg-gray-50 p-2 rounded text-sm"
+                          className="bg-gray-100 p-2 rounded text-sm border"
                         >
-                          <p className="mb-1">{comment.content}</p>
+                          <p className="mb-1 text-gray-800">{comment.content}</p>
                           <div className="text-xs text-gray-500">
                             By {comment.author.name || comment.author.email} •{" "}
                             {new Date(comment.createdAt).toLocaleDateString()}
