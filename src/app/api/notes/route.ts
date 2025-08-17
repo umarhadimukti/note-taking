@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
   try {
     const user = getUserFromCookie(request);
     if (!user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const notes = await prisma.note.findMany({
@@ -47,20 +47,20 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(
       { notes },
       { status: 200 }
-    )
+    );
   } catch (err) {
-    return NextResponse.json({ error: 'Failed to fetch notes' }, { status: 500 })
+    return NextResponse.json({ error: 'Failed to fetch notes' }, { status: 500 });
   }
 }
 
 export async function POST(request: NextRequest) {
   try {
-    const user = getUserFromCookie(request)
+    const user = getUserFromCookie(request);
     if (!user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const { title, content, isPublic } = await request.json()
+    const { title, content, isPublic } = await request.json();
 
     const note = await prisma.note.create({
       data: {
@@ -74,10 +74,10 @@ export async function POST(request: NextRequest) {
           select: { id: true, name: true, email: true }
         }
       }
-    })
+    });
 
-    return NextResponse.json({ note })
+    return NextResponse.json({ note });
   } catch (error) {
-    return NextResponse.json({ error: 'Failed to create note' }, { status: 500 })
+    return NextResponse.json({ error: 'Failed to create note' }, { status: 500 });
   }
 }
