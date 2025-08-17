@@ -8,10 +8,10 @@ export const authenticatedRoutes = [
 export const unauthenticatedRoutes = [
   {
     title: "Sign in",
-    path: "/signin"
+    path: "/auth/signin"
   },
   {
     title: "Sign up",
-    path: "/signup"
+    path: "/auth/signup"
   },
 ]
